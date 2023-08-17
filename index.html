@@ -9,36 +9,31 @@
   <body>
     <div class="container">
       <div>
-        <select name="choixo5" id="">
-          <option value="text"></option>
+        <select name="sourceLanguage">
+          <option value="en">English</option>
+          <option value="es">Spanish</option>
+          <option value="fr">French</option>
+          <!-- Add more language options as needed -->
         </select>
         <div>
-          <textarea
-            class="translated-text"
-            cols="30"
-            rows="10"
-            readonly
-          ></textarea>
+          <textarea name="sourceText" cols="30" rows="10"></textarea>
         </div>
       </div>
       <div>
-        <select name="choixo5" id="">
-          <option value="text"></option>
+        <select name="targetLanguage">
+          <option value="en">English</option>
+          <option value="es">Spanish</option>
+          <option value="fr">French</option>
+          <!-- Add more language options as needed -->
         </select>
         <div>
-          <textarea
-            class="source-textarea"
-            data-source-lang="en"
-            data-target-lang="fr"
-            cols="30"
-            rows="10"
-          ></textarea>
+          <textarea name="targetText" cols="30" rows="10" disabled></textarea>
         </div>
         <div class="db">
-          <button class="btn">translate</button>
+          <button class="btn">Translate</button>
         </div>
       </div>
     </div>
+    <script src="script.js"></script>
   </body>
-  <script src="script.js"></script>
 </html>

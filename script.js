@@ -1,47 +1,38 @@
-// script.js
-
 document.addEventListener('DOMContentLoaded', function () {
     const apiKey = '0a3d25bbabmsh8aea85ddaa1da70p1b3ebbjsn244b8d781b5e'; // Replace with your actual RapidAPI key
     const apiUrl = 'https://text-translator2.p.rapidapi.com/translate';
-  
     const translateButton = document.querySelector('.btn');
-    const sourceTextAreas = document.querySelectorAll('textarea[name="type"]');
-    const targetTextAreas = document.querySelectorAll('.translated-text');
+    const sourceText = document.querySelectorAll('textarea')[0];
+    const targetText = document.querySelectorAll('textarea')[1];
   
     translateButton.addEventListener('click', async function () {
-      sourceTextAreas.forEach(async (sourceTextArea, index) => {
-        const sourceLang = sourceTextArea.getAttribute('data-source-lang');
-        const targetLang = sourceTextArea.getAttribute('data-target-lang');
-        const textToTranslate = sourceTextArea.value;
+      const sourceLanguage = document.querySelectorAll('select')[0].value;
+      const targetLanguage = document.querySelectorAll('select')[1].value;
   
-        if (textToTranslate && sourceLang && targetLang) {
-          const queryString = new URLSearchParams({
-            source: sourceLang,
-            target: targetLang,
-            text: textToTranslate,
-          }).toString();
+      const options = {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/x-www-form-urlencoded',
+          'X-RapidAPI-Key': '0a3d25bbabmsh8aea85ddaa1da70p1b3ebbjsn244b8d781b5e',
+          'X-RapidAPI-Host': 'text-translator2.p.rapidapi.com'
+        },
+        body: new URLSearchParams({
+          source_language: sourceLanguage,
+          target_language: targetLanguage,
+          text: sourceText.value
+        })
+      };
   
-          const finalUrl = `${apiUrl}?${queryString}`;
-  
-          try {
-            const response = await fetch(finalUrl, {
-              method: 'GET',
-              headers: {
-                'X-RapidAPI-Host': 'text-translator2.p.rapidapi.com',
-                'X-RapidAPI-Key': apiKey,
-              },
-            });
-  
-            if (response.ok) {
-              const data = await response.json();
-              targetTextAreas[index].value = data.data.translation;
-            } else {
-              console.error('API request failed:', response.statusText);
-            }
-          } catch (error) {
-            console.error('Error fetching data:', error);
-          }
+      try {
+        const response = await fetch(apiUrl, options);
+        if (response.ok) {
+          const result = await response.text();
+          targetText.value = result; // Display translated text
+        } else {
+          console.error('API request failed:', response.statusText);
         }
-      });
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     });
   });
