@@ -1,0 +1,16 @@
+/* Contact Us */
+.container {
+    display: flex;
+    gap: 25px;
+}
+
+.btn {
+    display: flex;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.db {
+    display: flex;
+    align-items: center;
+}
