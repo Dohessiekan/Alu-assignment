@@ -39,3 +39,7 @@ const targetText = document.querySelectorAll('textarea')[1];
 }
   });
 });
+
+this is the link of my video :
+
+https://www.loom.com/share/4194ce3933d748d99248b0878d20d883
